@@ -354,10 +354,6 @@ To improve this template:
 3. Improve documentation
 4. Share feedback
 
-## 📄 License
-
-[Add your license here]
-
 ## 🙏 Acknowledgments
 
 - Built for [Cursor](https://cursor.sh/) AI code editor
