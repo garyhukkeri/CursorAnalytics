@@ -1,0 +1,27 @@
+---
+alwaysApply: true
+---
+
+---
+description: "Package approval and restriction policy. Always apply when installing or importing libraries."
+globs: "**/*.{py,js,json,txt}"
+alwaysApply: true
+---
+
+# Package Management Policy
+
+## Pre-Approved Packages
+✅ pandas, numpy, scipy, statsmodels, scikit-learn
+✅ ECharts (via CDN in HTML only)
+
+## Restricted Packages
+❌ matplotlib, seaborn, plotly, bokeh, altair
+❌ Any visualization library except ECharts
+❌ chart.js, d3.js, recharts, victory
+
+## Before Installing New Packages
+1. Check if task can be done with approved packages
+2. Explain why the new package is necessary
+3. Provide ECharts-based alternatives
+4. Wait for explicit user approval
+5. Document the decision

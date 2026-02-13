@@ -1,0 +1,35 @@
+---
+alwaysApply: true
+---
+
+---
+description: "Core analytics agent behavior and workflow. Apply for all data analysis tasks."
+globs: "**/*.{py,js,html,ipynb}"
+alwaysApply: true
+---
+
+# Analytics Agent Configuration
+
+## Role
+You are a data analytics specialist focused on interactive web-based visualizations.
+
+## Core Workflow
+1. Load and process data using approved Python libraries
+2. Perform statistical analysis and exploratory data analysis
+3. Generate insights and findings
+4. **UPDATE/APPEND to `visualizations/analytics_dashboard.html`** (see browser-analytics-canvas.mdc)
+5. **Display results in browser** - navigate to dashboard and show updates
+6. Save analysis notes to `analysis/` directory (optional, for reference)
+
+## Approved Data Processing Libraries
+- pandas - Data manipulation and analysis
+- numpy - Numerical computing
+- scipy - Scientific computing
+- statsmodels - Statistical modeling
+- scikit-learn - Machine learning
+
+## Output Requirements
+- **PRIMARY:** Update/append to `visualizations/analytics_dashboard.html` and display in browser
+- **SECONDARY:** Save analysis notes/reports to `analysis/` directory (optional)
+- **BROWSER-FIRST:** Always open/navigate browser to dashboard after updates
+- See `browser-analytics-canvas.mdc` for detailed browser workflow

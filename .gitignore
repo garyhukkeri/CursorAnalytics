@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Data files (optional - uncomment if you don't want to commit data)
+# data/*.csv
+# data/*.xlsx
+# data/*.json
+
+# Analysis outputs (optional - uncomment if you don't want to commit analysis)
+# analysis/*
+
+# Visualizations (optional - uncomment if you don't want to commit dashboard)
+# visualizations/*.html
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Environment variables
+.env
+.env.local
+
+# Temporary files
+*.tmp
+*.temp

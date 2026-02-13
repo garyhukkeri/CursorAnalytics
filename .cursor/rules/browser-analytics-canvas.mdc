@@ -1,0 +1,160 @@
+---
+description: "Browser-first analytics canvas workflow. The browser is the primary interface for all analytics interactions."
+globs: "**/*.{py,js,html,ipynb}"
+alwaysApply: true
+---
+
+# Browser Analytics Canvas - PRIMARY WORKFLOW
+
+## CRITICAL: Browser as Default Canvas
+
+**The browser view is the PRIMARY canvas for all analytics work.**
+- All analysis results MUST be displayed/updated in the browser
+- Use a SINGLE analytics dashboard file that gets updated/appended
+- NEVER create multiple visualization files unless explicitly requested
+- The browser tab is the persistent workspace for analytics sessions
+
+## Default Analytics Dashboard
+
+**File Location:** `visualizations/analytics_dashboard.html`
+
+This is the SINGLE file that serves as the analytics canvas:
+- **First analysis:** Create this file with initial content
+- **Subsequent analyses:** UPDATE or APPEND to this existing file
+- **Browser interaction:** Always open/navigate to this file in browser
+- **Session continuity:** Keep the same browser tab open across interactions
+
+## Workflow Pattern
+
+### Initial Setup (First Time)
+1. Create `visualizations/analytics_dashboard.html` with:
+   - Standard ECharts template
+   - Container structure for multiple charts
+   - Section-based layout for different analyses
+   - Auto-scrolling to new sections
+
+2. Start local HTTP server: `python3 -m http.server 8000` (background)
+
+3. Navigate browser to: `http://localhost:8000/visualizations/analytics_dashboard.html`
+
+### Subsequent Analytics Tasks
+1. **Always check if dashboard exists** - if yes, read and update it
+2. **Append new sections** rather than replacing content
+3. **Use browser navigation** to refresh/update the view
+4. **Maintain browser tab** - reuse the same tab across interactions
+5. **Add timestamps** to new analysis sections
+
+## Update Patterns
+
+### Adding New Analysis
+- **Append** a new `<section>` or `<div class="analysis-section">` 
+- Each section should have:
+  - Unique ID: `analysis-YYYY-MM-DD-HHMMSS` or descriptive name
+  - Title with timestamp
+  - Chart container with unique ID
+  - ECharts initialization code
+
+### Updating Existing Analysis
+- **Modify** existing sections when user requests updates
+- **Preserve** other sections unless explicitly asked to remove
+- **Add version notes** in comments or visible text
+
+### Structure Template
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Analytics Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  <style>
+    /* Base styles */
+    body { margin: 0; padding: 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; }
+    .container { max-width: 1400px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .analysis-section { margin-bottom: 60px; padding-bottom: 40px; border-bottom: 2px solid #e0e0e0; }
+    .analysis-section:last-child { border-bottom: none; }
+    .section-title { font-size: 24px; font-weight: 600; color: #333; margin-bottom: 10px; }
+    .section-timestamp { color: #666; font-size: 12px; margin-bottom: 20px; }
+    .chart-container { margin-bottom: 30px; }
+    .chart-title { font-size: 18px; font-weight: 600; color: #333; margin-bottom: 15px; }
+    .chart { width: 100%; height: 500px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Analytics Dashboard</h1>
+    
+    <!-- Analysis sections get appended here -->
+    <div id="analytics-content">
+      <!-- New analyses are added as new sections -->
+    </div>
+  </div>
+  
+  <script>
+    // Chart initialization code for each section
+    // Each new analysis adds its own script block
+  </script>
+</body>
+</html>
+```
+
+## Browser Interaction Protocol
+
+### When Starting Analytics Session
+1. Check if `analytics_dashboard.html` exists
+2. If not, create it with base template
+3. Start HTTP server if not running: `python3 -m http.server 8000` (background)
+4. Navigate browser to dashboard: `http://localhost:8000/visualizations/analytics_dashboard.html`
+5. Lock browser for updates: `browser_lock()`
+
+### When Adding Analysis
+1. Read existing `analytics_dashboard.html`
+2. Append new analysis section with:
+   - Unique section ID
+   - Timestamp
+   - Chart container
+   - ECharts initialization
+3. Save updated file
+4. Reload browser: `browser_reload()` or navigate again
+5. Scroll to new section: `browser_scroll()` to new section
+6. Unlock browser: `browser_unlock()` when done
+
+### When Updating Analysis
+1. Read existing `analytics_dashboard.html`
+2. Locate target section by ID or content
+3. Modify chart data/configuration
+4. Save file
+5. Reload browser
+6. Scroll to updated section
+
+## Key Principles
+
+1. **Single Source of Truth:** `analytics_dashboard.html` is the only visualization file
+2. **Browser-First:** Always display results in browser, not just save files
+3. **Append Pattern:** Add new analyses, don't replace old ones
+4. **Session Continuity:** Keep browser tab open and reuse it
+5. **Auto-Scroll:** Scroll to new/updated sections automatically
+6. **Timestamp Everything:** Each analysis section has creation timestamp
+
+## Integration with Existing Rules
+
+- **ECharts-Only:** Still applies - all charts use ECharts
+- **Package Policy:** Still applies - use approved Python libraries for data processing
+- **Project Structure:** Dashboard lives in `visualizations/` directory
+- **Analytics Agent:** Browser display is now the PRIMARY output method
+
+## User Interaction Flow
+
+When user requests analysis:
+1. ✅ Process data (Python/approved libraries)
+2. ✅ Generate insights
+3. ✅ **UPDATE/APPEND to `analytics_dashboard.html`**
+4. ✅ **Open/navigate browser to dashboard**
+5. ✅ **Scroll to new section**
+6. ✅ **Show results in browser** (not just mention file creation)
+
+## Exception Cases
+
+- **Explicit Request:** If user asks for separate file, create it but still update dashboard
+- **Export Needs:** Dashboard can be exported/saved, but dashboard remains primary
+- **Different Projects:** Each project can have its own dashboard file

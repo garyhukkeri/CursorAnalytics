@@ -1,0 +1,119 @@
+---
+alwaysApply: true
+---
+
+---
+description: "Strict ECharts-only visualization policy. Apply when creating any charts, graphs, or visual outputs."
+globs: "**/*.html"
+alwaysApply: true
+---
+
+# Visualization Policy - STRICT
+
+## CRITICAL RULE: ECharts Only
+- Use ONLY Apache ECharts for ALL visualizations
+- Load from CDN: https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js
+- NEVER use: matplotlib, seaborn, plotly, bokeh, altair, d3, chart.js, or any other charting library
+- All charts must render in browser preview
+
+## Package Approval Process
+Before suggesting ANY library not in the approved list:
+1. Explain why it's needed
+2. Propose an alternative using ECharts or approved packages
+3. Wait for explicit user approval
+4. Log the request for review
+
+## HTML Template Structure
+Every visualization HTML must include:
+- ECharts loaded via CDN
+- Responsive container with explicit dimensions
+- Chart initialization with proper options
+- Window resize handler for responsiveness
+- Clean, minimal styling
+- Descriptive title
+
+## ECharts Best Practices
+- Use semantic option configurations
+- Include interactive tooltips
+- Add legends for multi-series charts
+- Enable toolbox for save/zoom features
+- Make charts responsive with resize listeners
+- Use appropriate chart types for data
+
+## Example Template
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Analysis Results</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        #chart { 
+            width: 100%; 
+            height: 600px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Chart Title</h1>
+        <div id="chart"></div>
+    </div>
+    
+    <script>
+        var chart = echarts.init(document.getElementById('chart'));
+        
+        var option = {
+            // ECharts configuration here
+        };
+        
+        chart.setOption(option);
+        window.addEventListener('resize', () => chart.resize());
+    </script>
+</body>
+</html>
+```
+```
+
+### 4. Add Global User Rules (Optional)
+
+Go to **Cursor Settings → General → Rules for AI** and add:
+```
+Use only ECharts for visualizations. Create HTML files for browser preview. Follow project rules in .cursor/rules/
+```
+
+### 5. Using Cursor's Browser Preview
+
+**To view your visualizations:**
+
+1. After Cursor creates an HTML file in `visualizations/`
+2. **Right-click the file** in the file explorer
+3. Select **"Open Preview"** or use the split view
+4. The ECharts visualization renders interactively
+
+**Alternatively:**
+- Use Command Palette (Cmd/Ctrl + Shift + P) → "Simple Browser: Show"
+- Click the preview icon in the editor toolbar
+
+### 6. Test Your Configuration
+
+Try this prompt in Cursor:
+```
+Create a sample time series analysis with ECharts visualization. 
+Generate random data for the past 30 days and show it as a line chart 
+with moving average. Save as HTML for browser preview.
